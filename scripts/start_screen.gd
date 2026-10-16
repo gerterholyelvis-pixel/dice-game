@@ -20,6 +20,9 @@ const PARALLAX_DRAGON := 28.0
 @onready var fullscreen_check: CheckButton = %FullscreenCheck
 @onready var back_button: Button = %BackButton
 
+## When false, Start only emits `start_requested` and does not switch scenes (used by tests).
+var change_scene_on_start: bool = true
+
 var _background_home: Vector2
 var _dragon_home: Vector2
 
@@ -120,6 +123,8 @@ func _play_intro() -> void:
 
 func _on_start_pressed() -> void:
 	start_requested.emit()
+	if not change_scene_on_start:
+		return
 	if ResourceLoader.exists(GAME_SCENE_PATH):
 		get_tree().change_scene_to_file(GAME_SCENE_PATH)
 	else:

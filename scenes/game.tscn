@@ -1,0 +1,372 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_script"]
+[ext_resource type="Theme" path="res://themes/gothic.tres" id="2_theme"]
+[ext_resource type="PackedScene" path="res://scenes/arena.tscn" id="3_arena"]
+[ext_resource type="Script" path="res://scripts/game/heat_meter.gd" id="4_heat"]
+
+[sub_resource type="StyleBoxFlat" id="Sty_bar_bg"]
+bg_color = Color(0.05, 0.02, 0.02, 0.85)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.8, 0.55, 0.22, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="Sty_bar_fill"]
+bg_color = Color(1, 0.55, 0.12, 1)
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
+shadow_color = Color(1, 0.4, 0.05, 0.55)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="Sty_hud"]
+bg_color = Color(0.04, 0.015, 0.02, 0.78)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.42, 0.18, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 22.0
+content_margin_top = 12.0
+content_margin_right = 22.0
+content_margin_bottom = 12.0
+
+[sub_resource type="Gradient" id="Grad_soft"]
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.45, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="Tex_soft"]
+gradient = SubResource("Grad_soft")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Grad_burst"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.95, 0.7, 1, 1, 0.65, 0.12, 0.9, 0.7, 0.15, 0.02, 0)
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Arena" parent="." instance=ExtResource("3_arena")]
+unique_name_in_owner = true
+
+[node name="Dice" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="Root" type="Control" parent="Hud"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_theme")
+
+[node name="HoardBox" type="VBoxContainer" parent="Hud/Root"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 22.0
+offset_right = 1360.0
+offset_bottom = 120.0
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="HoardTitle" type="Label" parent="Hud/Root/HoardBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.4, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.01, 0.01, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 30
+text = "THE DRAGON'S HOARD"
+horizontal_alignment = 1
+
+[node name="HoardBar" type="ProgressBar" parent="Hud/Root/HoardBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("Sty_bar_bg")
+theme_override_styles/fill = SubResource("Sty_bar_fill")
+max_value = 40.0
+show_percentage = false
+
+[node name="HoardValue" type="Label" parent="Hud/Root/HoardBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.92, 0.7, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.01, 0.01, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 30
+text = "0 / 40"
+horizontal_alignment = 1
+
+[node name="Status" type="PanelContainer" parent="Hud/Root"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 28.0
+offset_right = 340.0
+offset_bottom = 230.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Sty_hud")
+
+[node name="Box" type="VBoxContainer" parent="Hud/Root/Status"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="RoundLabel" type="Label" parent="Hud/Root/Status/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.72, 0.3, 1)
+theme_override_font_sizes/font_size = 38
+text = "ROUND 1 / 6"
+
+[node name="TurnsLabel" type="Label" parent="Hud/Root/Status/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Turns left: 4"
+
+[node name="HeatCaption" type="Label" parent="Hud/Root/Status/Box"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.5, 0.3, 1)
+theme_override_font_sizes/font_size = 24
+text = "HEAT"
+
+[node name="HeatMeter" type="Control" parent="Hud/Root/Status/Box"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 58)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("4_heat")
+
+[node name="MenuButton" type="Button" parent="Hud/Root"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1720.0
+offset_top = 30.0
+offset_right = 1890.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 30
+text = "Menu"
+
+[node name="PotBox" type="VBoxContainer" parent="Hud/Root"]
+layout_mode = 0
+offset_left = 1470.0
+offset_top = 400.0
+offset_right = 1890.0
+offset_bottom = 520.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="PotLabel" type="Label" parent="Hud/Root/PotBox"]
+unique_name_in_owner = true
+layout_mode = 2
+pivot_offset = Vector2(210, 40)
+theme_override_colors/font_color = Color(1, 0.84, 0.4, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.02, 0.02, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 76
+text = "POT 0"
+horizontal_alignment = 1
+
+[node name="HintLabel" type="Label" parent="Hud/Root"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 360.0
+offset_top = 858.0
+offset_right = 1560.0
+offset_bottom = 898.0
+theme_override_colors/font_color = Color(0.85, 0.7, 0.58, 0.95)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+text = "Throw the bones."
+horizontal_alignment = 1
+
+[node name="Actions" type="HBoxContainer" parent="Hud/Root"]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 900.0
+offset_right = 1460.0
+offset_bottom = 1020.0
+mouse_filter = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="ThrowButton" type="Button" parent="Hud/Root/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(420, 110)
+layout_mode = 2
+text = "Throw!"
+
+[node name="PressButton" type="Button" parent="Hud/Root/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(420, 110)
+layout_mode = 2
+text = "Press On"
+
+[node name="BankButton" type="Button" parent="Hud/Root/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(420, 110)
+layout_mode = 2
+text = "Bank"
+
+[node name="PopupLayer" type="Control" parent="Hud/Root"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="RewardOverlay" type="Control" parent="Hud/Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="Hud/Root/RewardOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="Center" type="CenterContainer" parent="Hud/Root/RewardOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Hud/Root/RewardOverlay/Center"]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="Hud/Root/RewardOverlay/Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="RewardTitle" type="Label" parent="Hud/Root/RewardOverlay/Center/Panel/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.4, 1)
+theme_override_font_sizes/font_size = 80
+text = "Hoard Raided!"
+horizontal_alignment = 1
+
+[node name="RewardSub" type="Label" parent="Hud/Root/RewardOverlay/Center/Panel/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Claim a new die for your pouch"
+horizontal_alignment = 1
+
+[node name="OfferRow" type="HBoxContainer" parent="Hud/Root/RewardOverlay/Center/Panel/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="EndOverlay" type="Control" parent="Hud/Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="Hud/Root/EndOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.78)
+
+[node name="Center" type="CenterContainer" parent="Hud/Root/EndOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Hud/Root/EndOverlay/Center"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="Hud/Root/EndOverlay/Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="EndTitle" type="Label" parent="Hud/Root/EndOverlay/Center/Panel/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.25, 1)
+theme_override_font_sizes/font_size = 90
+text = "Devoured"
+horizontal_alignment = 1
+
+[node name="EndSub" type="Label" parent="Hud/Root/EndOverlay/Center/Panel/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "..."
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Hud/Root/EndOverlay/Center/Panel/Box"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="RetryButton" type="Button" parent="Hud/Root/EndOverlay/Center/Panel/Box/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New Run"
+
+[node name="EndMenuButton" type="Button" parent="Hud/Root/EndOverlay/Center/Panel/Box/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Fade" type="ColorRect" parent="Hud/Root"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

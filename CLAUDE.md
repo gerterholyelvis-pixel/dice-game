@@ -65,3 +65,9 @@ tools/                dev-only scripts (screenshots etc.)
 - SVGs import via ThorVG: no filters; use gradients/clip paths only. Imported at `svg/scale=2.0` with mipmaps; TextureRects use `texture_filter = 6`.
 - Full-screen shader effects live in `shaders/` (fog, god_rays, heat_haze, vignette, dragon, title_metal). Never use `atan()` directly for radial noise (seam at the wrap); sample noise on `cos/sin` instead.
 - Dark gradients band visibly at 8 bits; the vignette shader's grain is the dither. Keep it >= 0.05.
+
+## Game design (current)
+- Core loop: real 3D physics dice (`Die3D`, RigidBody3D) are thrown onto a ritual altar (`scenes/arena.tscn`). Faces are read from the landed orientation, never pre-rolled.
+- Rules live in `scripts/game/run_state.gd` (pure logic, tested): a die face of 1 pip is a burn; 3 burns in a turn scorch you and lose the pot; freeze keepers, Press On to re-throw the rest, or Bank. Beat each round's target within 4 turns, then claim a new die (`dice_types.gd`).
+- `scripts/game.gd` only sequences throws and drives the HUD. Balance can be re-checked with `tools/simulate.gd` (`-- runs=3000 [targets=a,b,..]`).
+- Do not copy Balatro's look or structure (card hands, chips x mult, swirl backdrop, CRT). Keep the visual identity: torchlit altar, runes, dragon looming, ember-pipped bone dice.

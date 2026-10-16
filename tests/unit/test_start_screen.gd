@@ -66,9 +66,14 @@ func test_open_settings_syncs_slider_to_current_volume() -> void:
 
 
 func test_start_emits_signal() -> void:
+	_screen.change_scene_on_start = false
 	watch_signals(_screen)
 	_screen.start_button.pressed.emit()
 	assert_signal_emitted(_screen, "start_requested")
+
+
+func test_change_scene_on_start_defaults_to_true() -> void:
+	assert_true(_screen.change_scene_on_start)
 
 
 func test_trigger_flash_raises_flash_alpha() -> void:
