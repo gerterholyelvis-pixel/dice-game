@@ -69,3 +69,14 @@ func test_start_emits_signal() -> void:
 	watch_signals(_screen)
 	_screen.start_button.pressed.emit()
 	assert_signal_emitted(_screen, "start_requested")
+
+
+func test_trigger_flash_raises_flash_alpha() -> void:
+	_screen.trigger_flash()
+	await wait_seconds(0.08)
+	assert_gt(_screen.flash.color.a, 0.0)
+
+
+func test_graphics_nodes_present() -> void:
+	for node_name in ["GodRays", "FogBack", "FogFront", "HeatHaze", "Sparks", "NostrilSmoke", "WorldEnvironment"]:
+		assert_not_null(_screen.get_node_or_null(node_name), "%s missing" % node_name)

@@ -59,3 +59,9 @@ tools/                dev-only scripts (screenshots etc.)
 ## Workflow
 - Small commits, imperative messages. Don't commit `.godot/`, `*.aup3`, or `user://` data.
 - Add or update a GUT test with every behaviour change.
+
+## Graphics notes (Compatibility renderer)
+- Glow works without HDR 2D: `WorldEnvironment` with `background_mode = Canvas` and a low `glow_hdr_threshold` (~0.65).
+- SVGs import via ThorVG: no filters; use gradients/clip paths only. Imported at `svg/scale=2.0` with mipmaps; TextureRects use `texture_filter = 6`.
+- Full-screen shader effects live in `shaders/` (fog, god_rays, heat_haze, vignette, dragon, title_metal). Never use `atan()` directly for radial noise (seam at the wrap); sample noise on `cos/sin` instead.
+- Dark gradients band visibly at 8 bits; the vignette shader's grain is the dither. Keep it >= 0.05.

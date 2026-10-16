@@ -42,11 +42,36 @@
       <stop offset="0" stop-color="#f0e4c0"/>
       <stop offset="1" stop-color="#9a8660"/>
     </linearGradient>
-  </defs>
+    <radialGradient id="wingGlow" gradientUnits="userSpaceOnUse" cx="1130" cy="430" r="520">
+      <stop offset="0" stop-color="#ff9a3c" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#d4501a" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#d4501a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fin" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b8461a" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#2a0c08" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="hl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb06a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffb06a" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="nostrilGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffd070" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ff5a0a" stop-opacity="0"/>
+    </radialGradient>  </defs>
 
   <!-- ========== FAR WING ========== -->
   <g>
     <path d="M1300 150 L860 172 Q930 280 935 392 Q1040 392 1120 520 Q1330 520 1500 650 L1580 720 Z" fill="url(#membrane)"/>
+    <path d="M1300 150 L860 172 Q930 280 935 392 Q1040 392 1120 520 Q1330 520 1500 650 L1580 720 Z" fill="url(#wingGlow)"/>
+    <g fill="none" stroke="#2a0c08" stroke-width="2.2" opacity="0.7" stroke-linecap="round">
+      <path d="M1300 150 Q1050 230 900 280"/>
+      <path d="M1300 150 Q1140 290 1010 390"/>
+      <path d="M1300 150 Q1190 360 1060 455"/>
+      <path d="M1300 150 Q1260 400 1250 560"/>
+      <path d="M1300 150 Q1340 380 1400 600"/>
+      <path d="M1500 650 Q1380 560 1250 540"/>
+    </g>
     <!-- finger bones -->
     <g fill="none" stroke="#1a0807" stroke-linecap="round">
       <path d="M1580 720 Q1500 420 1300 150" stroke-width="26"/>
@@ -108,6 +133,15 @@
   <path d="M1085 606 C1115 585 1150 560 1180 520" fill="none" stroke="#ff9a3a" stroke-width="3" opacity="0.5"/>
   <path d="M1070 655 C1115 690 1175 722 1235 780 C1320 865 1380 985 1370 1080" fill="none" stroke="url(#rim)" stroke-width="4" opacity="0.8"/>
 
+  <!-- ========== JAW FRILL ========== -->
+  <path d="M1120 620 L1310 612 Q1300 650 1336 700 Q1300 706 1296 740 Q1290 770 1330 796 Q1250 790 1170 700 Z" fill="url(#fin)"/>
+  <g fill="none" stroke="#ffb06a" stroke-width="2.4" stroke-linecap="round" opacity="0.8">
+    <path d="M1130 630 L1312 612"/>
+    <path d="M1140 650 L1338 700"/>
+    <path d="M1160 676 L1298 740"/>
+    <path d="M1180 700 L1330 796"/>
+  </g>
+  <path d="M1312 612 L1356 596 L1318 626 Z M1338 700 L1380 704 L1330 716 Z M1298 740 L1336 764 L1290 756 Z" fill="#d8c8a0"/>
   <!-- ========== HORNS ========== -->
   <path d="M1170 412 C1260 384 1370 322 1478 218 C1420 330 1340 414 1255 456 Z" fill="url(#horn)" stroke="#ffb06a" stroke-width="1.5"/>
   <path d="M1212 448 C1300 436 1410 412 1520 388 C1430 446 1340 486 1250 496 Z" fill="url(#horn)" stroke="#ffb06a" stroke-width="1.5"/>
@@ -159,6 +193,19 @@
     <path d="M1048 592 L1060 622 L1074 600 Z"/>
   </g>
 
+  <!-- ========== EXTRA HEAD DETAIL ========== -->
+  <!-- brow spikes -->
+  <path d="M1004 474 L1004 446 L1032 462 Z M1038 454 L1048 424 L1070 444 Z M1076 440 L1096 410 L1112 436 Z" fill="#1c0c0a" stroke="#ff9a4a" stroke-width="1.4"/>
+  <!-- nose horn -->
+  <path d="M912 516 C918 496 926 484 940 474 C936 492 944 508 952 514 Z" fill="url(#horn)" stroke="#ffb06a" stroke-width="1.2"/>
+  <!-- chin beard spikes -->
+  <path d="M940 728 L930 776 L972 738 Z M984 734 L984 788 L1018 726 Z M1030 722 L1046 772 L1062 708 Z" fill="#1c0c0a" stroke="#ff9a4a" stroke-width="1.4"/>
+  <!-- soft highlight patches -->
+  <ellipse cx="968" cy="518" rx="64" ry="9" fill="url(#hl)" transform="rotate(-20 968 518)"/>
+  <ellipse cx="1120" cy="430" rx="60" ry="7" fill="url(#hl)" transform="rotate(-6 1120 430)"/>
+  <ellipse cx="1000" cy="720" rx="70" ry="6" fill="url(#hl)" transform="rotate(-12 1000 720)"/>
+  <!-- nostril glow -->
+  <circle cx="906" cy="530" r="22" fill="url(#nostrilGlow)"/>
   <!-- ========== EYE ========== -->
   <circle cx="1062" cy="478" r="62" fill="url(#eyeGlow)"/>
   <path d="M1028 484 Q1060 456 1100 470 Q1070 500 1028 484 Z" fill="#ffc83a" stroke="#4a0a04" stroke-width="2.5"/>

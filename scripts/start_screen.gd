@@ -12,6 +12,7 @@ const PARALLAX_DRAGON := 28.0
 @onready var dragon: TextureRect = %Dragon
 @onready var fire_glow: TextureRect = %FireGlow
 @onready var fade: ColorRect = %Fade
+@onready var flash: ColorRect = %Flash
 @onready var start_button: Button = %StartButton
 @onready var settings_button: Button = %SettingsButton
 @onready var settings_panel: PanelContainer = %SettingsPanel
@@ -33,8 +34,39 @@ func _ready() -> void:
 	volume_slider.value_changed.connect(_on_volume_changed)
 	fullscreen_check.toggled.connect(_on_fullscreen_toggled)
 
+	for button: Button in [start_button, settings_button, back_button]:
+		button.resized.connect(func() -> void: button.pivot_offset = Vector2(0.0, button.size.y * 0.5))
+		button.mouse_entered.connect(_set_button_hover.bind(button, true))
+		button.mouse_exited.connect(_set_button_hover.bind(button, false))
+		button.focus_entered.connect(_set_button_hover.bind(button, true))
+		button.focus_exited.connect(_set_button_hover.bind(button, false))
+
 	_play_intro()
+	_schedule_flash()
 	start_button.grab_focus()
+
+
+## Distant storm flicker: two quick pulses, then waits a random while.
+func trigger_flash() -> void:
+	var tween := create_tween()
+	tween.tween_property(flash, "color:a", 0.32, 0.05)
+	tween.tween_property(flash, "color:a", 0.05, 0.08)
+	tween.tween_property(flash, "color:a", 0.22, 0.04)
+	tween.tween_property(flash, "color:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
+
+
+func _schedule_flash() -> void:
+	get_tree().create_timer(randf_range(6.0, 13.0)).timeout.connect(_on_flash_timer)
+
+
+func _on_flash_timer() -> void:
+	trigger_flash()
+	_schedule_flash()
+
+
+func _set_button_hover(button: Button, hovered: bool) -> void:
+	var target := Vector2.ONE * (1.045 if hovered else 1.0)
+	create_tween().tween_property(button, "scale", target, 0.12).set_trans(Tween.TRANS_QUAD)
 
 
 func open_settings() -> void:

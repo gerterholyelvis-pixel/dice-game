@@ -4,7 +4,7 @@ shader_type canvas_item;
 uniform float strength : hint_range(0.0, 1.5) = 0.95;
 uniform float radius : hint_range(0.1, 1.5) = 0.62;
 uniform float softness : hint_range(0.05, 1.0) = 0.55;
-uniform float grain : hint_range(0.0, 0.2) = 0.035;
+uniform float grain : hint_range(0.0, 0.2) = 0.07;
 
 void fragment() {
 	vec2 uv = UV - 0.5;

@@ -1,14 +1,31 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=34 format=3]
 
 [ext_resource type="Script" path="res://scripts/start_screen.gd" id="1_script"]
 [ext_resource type="Theme" path="res://themes/gothic.tres" id="2_theme"]
 [ext_resource type="Texture2D" path="res://assets/art/background.svg" id="3_bg"]
 [ext_resource type="Texture2D" path="res://assets/art/dragon.svg" id="4_dragon"]
-[ext_resource type="Shader" path="res://shaders/dragon.gdshader" id="5_dragon_shader"]
-[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="6_vignette"]
+[ext_resource type="Texture2D" path="res://assets/art/divider.svg" id="5_divider"]
+[ext_resource type="Shader" path="res://shaders/dragon.gdshader" id="6_dragon_shader"]
+[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="7_vignette"]
+[ext_resource type="Shader" path="res://shaders/fog.gdshader" id="8_fog"]
+[ext_resource type="Shader" path="res://shaders/heat_haze.gdshader" id="9_haze"]
+[ext_resource type="Shader" path="res://shaders/god_rays.gdshader" id="10_rays"]
+[ext_resource type="Shader" path="res://shaders/title_metal.gdshader" id="11_title"]
+
+[sub_resource type="Environment" id="Env_main"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.8
+glow_strength = 1.1
+glow_bloom = 0.1
+glow_blend_mode = 1
+glow_hdr_threshold = 0.65
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.12
 
 [sub_resource type="ShaderMaterial" id="Mat_dragon"]
-shader = ExtResource("5_dragon_shader")
+shader = ExtResource("6_dragon_shader")
 shader_parameter/scale_columns = 85.0
 shader_parameter/scale_strength = 0.38
 shader_parameter/flicker_speed = 5.0
@@ -16,11 +33,51 @@ shader_parameter/flicker_amount = 0.22
 shader_parameter/fire_tint = Color(1, 0.42, 0.08, 1)
 
 [sub_resource type="ShaderMaterial" id="Mat_vignette"]
-shader = ExtResource("6_vignette")
+shader = ExtResource("7_vignette")
 shader_parameter/strength = 0.95
 shader_parameter/radius = 0.62
 shader_parameter/softness = 0.55
-shader_parameter/grain = 0.035
+shader_parameter/grain = 0.07
+
+[sub_resource type="ShaderMaterial" id="Mat_fog_back"]
+shader = ExtResource("8_fog")
+shader_parameter/fog_color = Color(0.6, 0.22, 0.1, 1)
+shader_parameter/density = 0.55
+shader_parameter/noise_scale = 2.6
+shader_parameter/drift = Vector2(0.018, 0)
+shader_parameter/height_center = 0.78
+shader_parameter/height_spread = 0.22
+
+[sub_resource type="ShaderMaterial" id="Mat_fog_front"]
+shader = ExtResource("8_fog")
+shader_parameter/fog_color = Color(0.32, 0.1, 0.06, 1)
+shader_parameter/density = 0.95
+shader_parameter/noise_scale = 3.4
+shader_parameter/drift = Vector2(-0.03, 0)
+shader_parameter/height_center = 1.0
+shader_parameter/height_spread = 0.2
+
+[sub_resource type="ShaderMaterial" id="Mat_haze"]
+shader = ExtResource("9_haze")
+shader_parameter/strength = 0.007
+shader_parameter/speed = 1.6
+shader_parameter/center = Vector2(0.82, 0.5)
+shader_parameter/radius = Vector2(0.75, 0.5)
+
+[sub_resource type="ShaderMaterial" id="Mat_rays"]
+shader = ExtResource("10_rays")
+shader_parameter/origin = Vector2(0.59, 0.39)
+shader_parameter/ray_color = Color(1, 0.5, 0.18, 1)
+shader_parameter/intensity = 0.28
+shader_parameter/falloff = 1.6
+
+[sub_resource type="ShaderMaterial" id="Mat_title"]
+shader = ExtResource("11_title")
+shader_parameter/top_color = Color(1, 0.96, 0.8, 1)
+shader_parameter/mid_color = Color(0.93, 0.74, 0.38, 1)
+shader_parameter/bottom_color = Color(0.62, 0.3, 0.1, 1)
+shader_parameter/label_size = Vector2(830, 180)
+shader_parameter/sweep_period = 6.0
 
 [sub_resource type="Gradient" id="Grad_soft"]
 offsets = PackedFloat32Array(0, 0.35, 1)
@@ -45,9 +102,25 @@ colors = PackedColorArray(1, 0.95, 0.6, 0.95, 1, 0.6, 0.12, 0.85, 0.8, 0.18, 0.0
 _data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 1.6), 0.0, 0.0, 0, 0]
 point_count = 3
 
+[sub_resource type="Gradient" id="Grad_spark"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.95, 0.7, 1, 1, 0.55, 0.1, 0.9, 0.7, 0.15, 0.02, 0)
+
+[sub_resource type="Gradient" id="Grad_smoke"]
+offsets = PackedFloat32Array(0, 0.3, 1)
+colors = PackedColorArray(0.5, 0.35, 0.3, 0, 0.45, 0.32, 0.28, 0.3, 0.2, 0.12, 0.1, 0)
+
+[sub_resource type="Curve" id="Curve_smoke"]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 2.4), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="Gradient" id="Grad_ember"]
 offsets = PackedFloat32Array(0, 0.6, 1)
 colors = PackedColorArray(1, 0.8, 0.35, 1, 1, 0.38, 0.08, 0.8, 0.6, 0.1, 0.02, 0)
+
+[sub_resource type="Gradient" id="Grad_bokeh"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.55, 0.2, 0, 1, 0.45, 0.12, 0.22, 0.8, 0.2, 0.05, 0)
 
 [sub_resource type="Gradient" id="Grad_glow"]
 offsets = PackedFloat32Array(0, 0.4, 1)
@@ -71,8 +144,12 @@ grow_vertical = 2
 theme = ExtResource("2_theme")
 script = ExtResource("1_script")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env_main")
+
 [node name="Background" type="TextureRect" parent="."]
 unique_name_in_owner = true
+texture_filter = 6
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,8 +165,29 @@ texture = ExtResource("3_bg")
 expand_mode = 1
 stretch_mode = 6
 
+[node name="GodRays" type="ColorRect" parent="."]
+material = SubResource("Mat_rays")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FogBack" type="ColorRect" parent="."]
+material = SubResource("Mat_fog_back")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="Dragon" type="TextureRect" parent="."]
 unique_name_in_owner = true
+texture_filter = 6
 material = SubResource("Mat_dragon")
 layout_mode = 1
 anchors_preset = 15
@@ -137,6 +235,57 @@ scale_amount_max = 1.5
 scale_amount_curve = SubResource("Curve_flame")
 color_ramp = SubResource("Grad_flame")
 
+[node name="Sparks" type="CPUParticles2D" parent="."]
+material = SubResource("Mat_additive")
+position = Vector2(895, 630)
+amount = 45
+texture = SubResource("Tex_soft")
+lifetime = 1.8
+preprocess = 2.0
+direction = Vector2(-1, -0.25)
+spread = 38.0
+gravity = Vector2(0, 280)
+initial_velocity_min = 220.0
+initial_velocity_max = 560.0
+scale_amount_min = 0.04
+scale_amount_max = 0.1
+color_ramp = SubResource("Grad_spark")
+
+[node name="NostrilSmoke" type="CPUParticles2D" parent="."]
+position = Vector2(906, 528)
+amount = 18
+texture = SubResource("Tex_soft")
+lifetime = 4.0
+preprocess = 4.0
+direction = Vector2(-0.4, -1)
+spread = 22.0
+gravity = Vector2(-12, -18)
+initial_velocity_min = 14.0
+initial_velocity_max = 40.0
+scale_amount_min = 0.5
+scale_amount_max = 1.1
+scale_amount_curve = SubResource("Curve_smoke")
+color_ramp = SubResource("Grad_smoke")
+
+[node name="HeatHaze" type="ColorRect" parent="."]
+material = SubResource("Mat_haze")
+layout_mode = 0
+offset_left = 250.0
+offset_top = 430.0
+offset_right = 1050.0
+offset_bottom = 830.0
+mouse_filter = 2
+
+[node name="FogFront" type="ColorRect" parent="."]
+material = SubResource("Mat_fog_front")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="Embers" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("Mat_additive")
@@ -156,6 +305,24 @@ scale_amount_min = 0.05
 scale_amount_max = 0.15
 color_ramp = SubResource("Grad_ember")
 
+[node name="Bokeh" type="CPUParticles2D" parent="."]
+material = SubResource("Mat_additive")
+position = Vector2(960, 1110)
+amount = 14
+texture = SubResource("Tex_soft")
+lifetime = 11.0
+preprocess = 11.0
+emission_shape = 3
+emission_rect_extents = Vector2(980, 10)
+direction = Vector2(0.1, -1)
+spread = 20.0
+gravity = Vector2(10, -6)
+initial_velocity_min = 35.0
+initial_velocity_max = 90.0
+scale_amount_min = 0.35
+scale_amount_max = 0.8
+color_ramp = SubResource("Grad_bokeh")
+
 [node name="Vignette" type="ColorRect" parent="."]
 material = SubResource("Mat_vignette")
 layout_mode = 1
@@ -166,10 +333,22 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Flash" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("Mat_additive")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.62, 0.35, 0)
+
 [node name="TitleBox" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 140.0
-offset_top = 90.0
+offset_top = 80.0
 offset_right = 1000.0
 offset_bottom = 340.0
 mouse_filter = 2
@@ -177,9 +356,10 @@ theme_override_constants/separation = 0
 
 [node name="Title" type="Label" parent="TitleBox"]
 unique_name_in_owner = true
+material = SubResource("Mat_title")
 layout_mode = 2
 theme_override_colors/font_color = Color(0.93, 0.86, 0.66, 1)
-theme_override_colors/font_shadow_color = Color(1, 0.38, 0.04, 0.55)
+theme_override_colors/font_shadow_color = Color(1, 0.38, 0.04, 0.3)
 theme_override_colors/font_outline_color = Color(0.1, 0.02, 0.01, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 6
@@ -187,6 +367,13 @@ theme_override_constants/outline_size = 14
 theme_override_constants/shadow_outline_size = 14
 theme_override_font_sizes/font_size = 150
 text = "DICE GAME"
+
+[node name="Divider" type="TextureRect" parent="TitleBox"]
+texture_filter = 6
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_divider")
+stretch_mode = 3
 
 [node name="Subtitle" type="Label" parent="TitleBox"]
 layout_mode = 2
@@ -200,7 +387,7 @@ text = "Roll the bones. Wake the dragon."
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 140.0
-offset_top = 640.0
+offset_top = 660.0
 offset_right = 620.0
 offset_bottom = 900.0
 theme_override_constants/separation = 24
@@ -225,9 +412,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -360.0
-offset_top = -250.0
+offset_top = -190.0
 offset_right = 360.0
-offset_bottom = 250.0
+offset_bottom = 310.0
 grow_horizontal = 2
 grow_vertical = 2
 
