@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#050203"/>
+      <stop offset="0.45" stop-color="#1c0707"/>
+      <stop offset="0.78" stop-color="#5a1608"/>
+      <stop offset="1" stop-color="#8a2a0a"/>
+    </linearGradient>
+    <radialGradient id="moonGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff9a3c" stop-opacity="0.95"/>
+      <stop offset="0.18" stop-color="#ff6a1a" stop-opacity="0.75"/>
+      <stop offset="0.5" stop-color="#b8260a" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#4a0a05" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="moonDisc" cx="0.42" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#ffd9a0"/>
+      <stop offset="0.5" stop-color="#ff9a4a"/>
+      <stop offset="1" stop-color="#c8400f"/>
+    </radialGradient>
+    <radialGradient id="horizonGlow" cx="0.5" cy="1" r="0.8">
+      <stop offset="0" stop-color="#ff6a1a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ff6a1a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a0f0a"/>
+      <stop offset="1" stop-color="#14060530"/>
+    </linearGradient>
+    <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#220a08"/>
+      <stop offset="1" stop-color="#0c0304"/>
+    </linearGradient>
+    <linearGradient id="near" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#120505"/>
+      <stop offset="1" stop-color="#030102"/>
+    </linearGradient>
+    <radialGradient id="smoke" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#6a2a1a" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#6a2a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <rect width="1920" height="1080" fill="url(#horizonGlow)"/>
+
+  <!-- blood moon behind the dragon -->
+  <circle cx="1130" cy="420" r="640" fill="url(#moonGlow)"/>
+  <circle cx="1130" cy="420" r="210" fill="url(#moonDisc)" opacity="0.92"/>
+  <!-- moon craters -->
+  <circle cx="1070" cy="370" r="34" fill="#b8400f" opacity="0.35"/>
+  <circle cx="1190" cy="470" r="48" fill="#a8340c" opacity="0.30"/>
+  <circle cx="1120" cy="500" r="20" fill="#b8400f" opacity="0.30"/>
+
+  <!-- smoke / cloud bands -->
+  <ellipse cx="380" cy="230" rx="520" ry="70" fill="url(#smoke)"/>
+  <ellipse cx="1500" cy="150" rx="600" ry="60" fill="url(#smoke)"/>
+  <ellipse cx="700" cy="520" rx="700" ry="90" fill="url(#smoke)"/>
+  <ellipse cx="1650" cy="640" rx="500" ry="80" fill="url(#smoke)"/>
+
+  <!-- far mountains -->
+  <path d="M0 760 L90 700 L170 735 L260 650 L340 720 L430 670 L520 740 L610 690 L700 750 L800 700 L900 760 L1000 710 L1100 770 L1200 720 L1310 780 L1420 710 L1520 770 L1630 700 L1730 760 L1820 705 L1920 750 L1920 1080 L0 1080 Z" fill="url(#far)"/>
+
+  <!-- ruined gothic spires (mid) -->
+  <g fill="url(#mid)">
+    <path d="M0 880 L0 800 L60 770 L80 600 L96 560 L112 600 L130 770 L190 790 L230 760 L250 520 L262 470 L274 430 L286 470 L298 520 L318 760 L380 800 L420 780 L440 700 L470 690 L490 780 L560 820 L640 790 L700 830 L800 800 L900 840 L1000 810 L1100 850 L1200 820 L1300 860 L1400 830 L1500 870 L1600 835 L1700 870 L1800 840 L1920 880 L1920 1080 L0 1080 Z"/>
+  </g>
+  <!-- spire windows (embers) -->
+  <g fill="#ff7a1a" opacity="0.75">
+    <rect x="92" y="640" width="8" height="22"/>
+    <rect x="258" y="560" width="8" height="26"/>
+    <rect x="268" y="620" width="8" height="26"/>
+    <rect x="450" y="720" width="7" height="18"/>
+  </g>
+
+  <!-- near jagged rocks -->
+  <path d="M0 1080 L0 930 L70 960 L120 900 L190 950 L260 920 L330 975 L420 940 L500 990 L600 955 L700 1000 L820 965 L940 1010 L1060 975 L1180 1015 L1300 985 L1420 1020 L1540 990 L1660 1025 L1780 995 L1920 1030 L1920 1080 Z" fill="url(#near)"/>
+</svg>

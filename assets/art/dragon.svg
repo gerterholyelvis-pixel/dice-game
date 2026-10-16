@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="body" gradientUnits="userSpaceOnUse" x1="860" y1="420" x2="1800" y2="900">
+      <stop offset="0" stop-color="#6a2812"/>
+      <stop offset="0.35" stop-color="#2a0e0a"/>
+      <stop offset="1" stop-color="#080304"/>
+    </linearGradient>
+    <linearGradient id="bodyV" gradientUnits="userSpaceOnUse" x1="0" y1="380" x2="0" y2="1080">
+      <stop offset="0" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.65"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb347"/>
+      <stop offset="0.5" stop-color="#d4501a"/>
+      <stop offset="1" stop-color="#40100a"/>
+    </linearGradient>
+    <linearGradient id="membrane" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7a2410" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#1a0606" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="membraneNear" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a1008"/>
+      <stop offset="1" stop-color="#0a0304"/>
+    </linearGradient>
+    <linearGradient id="horn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#150907"/>
+      <stop offset="0.55" stop-color="#5a4232"/>
+      <stop offset="1" stop-color="#b8a07a"/>
+    </linearGradient>
+    <radialGradient id="eyeGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe070" stop-opacity="1"/>
+      <stop offset="0.3" stop-color="#ff9a1a" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#ff4a0a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mouthGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff0a0" stop-opacity="1"/>
+      <stop offset="0.3" stop-color="#ffb02a" stop-opacity="0.9"/>
+      <stop offset="0.7" stop-color="#e0480a" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#a02004" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tooth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0e4c0"/>
+      <stop offset="1" stop-color="#9a8660"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ========== FAR WING ========== -->
+  <g>
+    <path d="M1300 150 L860 172 Q930 280 935 392 Q1040 392 1120 520 Q1330 520 1500 650 L1580 720 Z" fill="url(#membrane)"/>
+    <!-- finger bones -->
+    <g fill="none" stroke="#1a0807" stroke-linecap="round">
+      <path d="M1580 720 Q1500 420 1300 150" stroke-width="26"/>
+      <path d="M1300 150 Q1080 150 860 172" stroke-width="14"/>
+      <path d="M1300 150 Q1100 250 935 392" stroke-width="12"/>
+      <path d="M1300 150 Q1180 330 1120 520" stroke-width="11"/>
+      <path d="M1300 150 Q1380 400 1500 650" stroke-width="10"/>
+    </g>
+    <!-- claws at joints -->
+    <path d="M1300 150 L1274 104 L1322 138 Z" fill="#d8c8a0"/>
+    <path d="M860 172 L812 160 L858 150 Z" fill="#d8c8a0"/>
+    <path d="M935 392 L896 420 L928 372 Z" fill="#d8c8a0"/>
+    <!-- rim light on wing edge -->
+    <path d="M1300 150 L860 172 Q930 280 935 392 Q1040 392 1120 520" fill="none" stroke="#ff8a3a" stroke-width="2.5" opacity="0.7"/>
+  </g>
+
+  <!-- ========== NEAR WING ========== -->
+  <g>
+    <path d="M1780 180 Q1860 150 1920 190 L1920 640 Q1840 560 1770 660 Q1760 560 1690 600 Q1680 520 1620 560 L1600 730 Z" fill="url(#membraneNear)"/>
+    <g fill="none" stroke="#0c0405" stroke-linecap="round">
+      <path d="M1600 730 Q1680 460 1780 180" stroke-width="30"/>
+      <path d="M1780 180 Q1900 160 1940 200" stroke-width="16"/>
+      <path d="M1780 180 Q1850 400 1920 640" stroke-width="13"/>
+      <path d="M1780 180 Q1770 400 1770 660" stroke-width="12"/>
+      <path d="M1780 180 Q1700 380 1620 560" stroke-width="11"/>
+    </g>
+    <path d="M1780 180 L1760 128 L1806 160 Z" fill="#d8c8a0"/>
+    <path d="M1780 180 Q1680 460 1600 730" fill="none" stroke="#ff8a3a" stroke-width="2.5" opacity="0.55"/>
+  </g>
+
+  <!-- ========== SPINES (behind neck) ========== -->
+  <g fill="#14090a" stroke="#c8501a" stroke-width="1.5">
+    <path d="M1290 410 L1300 360 L1330 426 Z"/>
+    <path d="M1350 440 L1372 384 L1394 462 Z"/>
+    <path d="M1410 486 L1442 432 L1456 510 Z"/>
+    <path d="M1470 540 L1512 492 L1516 568 Z"/>
+    <path d="M1525 610 L1574 570 L1570 640 Z"/>
+    <path d="M1575 685 L1630 650 L1620 716 Z"/>
+    <path d="M1625 765 L1684 740 L1668 800 Z"/>
+    <path d="M1670 845 L1730 830 L1708 886 Z"/>
+    <path d="M1715 935 L1778 930 L1750 982 Z"/>
+  </g>
+
+  <!-- ========== NECK + BODY ========== -->
+  <path id="neck" d="M1230 395 C1340 410 1470 520 1565 685 C1650 825 1725 965 1795 1080 L1370 1080 C1380 985 1320 865 1235 780 C1175 722 1115 690 1070 655 L1085 600 C1140 560 1205 495 1230 395 Z" fill="url(#body)"/>
+  <path d="M1230 395 C1340 410 1470 520 1565 685 C1650 825 1725 965 1795 1080 L1370 1080 C1380 985 1320 865 1235 780 C1175 722 1115 690 1070 655 L1085 600 C1140 560 1205 495 1230 395 Z" fill="url(#bodyV)"/>
+  <!-- belly plates (throat scutes) -->
+  <g fill="none" stroke="#a8541e" stroke-width="2.2" opacity="0.55">
+    <path d="M1100 668 Q1135 690 1160 674"/>
+    <path d="M1130 698 Q1170 722 1204 702"/>
+    <path d="M1166 730 Q1210 756 1248 732"/>
+    <path d="M1206 765 Q1252 792 1292 764"/>
+    <path d="M1250 805 Q1298 832 1338 802"/>
+    <path d="M1290 850 Q1336 874 1372 842"/>
+    <path d="M1322 900 Q1364 920 1396 886"/>
+    <path d="M1346 955 Q1384 972 1412 940"/>
+  </g>
+  <!-- neck rim light (fire-lit throat edge) -->
+  <path d="M1085 606 C1115 585 1150 560 1180 520" fill="none" stroke="#ff9a3a" stroke-width="3" opacity="0.5"/>
+  <path d="M1070 655 C1115 690 1175 722 1235 780 C1320 865 1380 985 1370 1080" fill="none" stroke="url(#rim)" stroke-width="4" opacity="0.8"/>
+
+  <!-- ========== HORNS ========== -->
+  <path d="M1170 412 C1260 384 1370 322 1478 218 C1420 330 1340 414 1255 456 Z" fill="url(#horn)" stroke="#ffb06a" stroke-width="1.5"/>
+  <path d="M1212 448 C1300 436 1410 412 1520 388 C1430 446 1340 486 1250 496 Z" fill="url(#horn)" stroke="#ffb06a" stroke-width="1.5"/>
+  <path d="M1170 540 C1230 560 1290 540 1340 520 C1290 580 1230 600 1180 590 Z" fill="url(#horn)" stroke="#ffb06a" stroke-width="1.2" opacity="0.9"/>
+  <!-- cheek spikes -->
+  <path d="M1125 632 L1190 716 L1105 668 Z" fill="#2a1410" stroke="#ff8a3a" stroke-width="1.5"/>
+  <path d="M1100 590 L1180 640 L1095 624 Z" fill="#2a1410" stroke="#ff8a3a" stroke-width="1.5"/>
+
+  <!-- ========== LOWER JAW ========== -->
+  <path d="M1085 604 C1062 642 1012 672 940 692 C912 700 890 704 878 716 C900 742 962 742 1014 726 C1072 706 1112 674 1132 642 Z" fill="url(#body)"/>
+  <path d="M1085 604 C1062 642 1012 672 940 692 C912 700 890 704 878 716 C900 742 962 742 1014 726 C1072 706 1112 674 1132 642 Z" fill="none" stroke="url(#rim)" stroke-width="3" opacity="0.8"/>
+
+  <!-- ========== MOUTH INTERIOR / FIRE GLOW ========== -->
+  <path d="M884 552 C960 566 1040 590 1088 610 C1062 644 1010 672 940 692 C912 696 892 698 880 706 Z" fill="#3a0a04"/>
+  <ellipse id="mouthGlow" cx="985" cy="626" rx="150" ry="60" fill="url(#mouthGlow)" transform="rotate(14 985 626)"/>
+  <!-- tongue -->
+  <path d="M960 676 Q1030 640 1084 622 Q1050 664 980 690 Z" fill="#8a1c08" opacity="0.8"/>
+
+  <!-- lower teeth -->
+  <g fill="url(#tooth)">
+    <path d="M900 704 L906 668 L922 698 Z"/>
+    <path d="M936 696 L944 654 L962 688 Z"/>
+    <path d="M976 686 L986 646 L1004 676 Z"/>
+    <path d="M1018 672 L1030 636 L1044 662 Z"/>
+    <path d="M1056 652 L1066 622 L1078 644 Z"/>
+  </g>
+
+  <!-- ========== UPPER HEAD ========== -->
+  <path d="M880 548 C878 530 895 518 912 516 C952 502 1002 482 1040 442 C1062 420 1092 406 1132 404 C1182 400 1222 395 1238 398 L1234 470 C1204 522 1152 578 1088 608 C1042 588 962 562 880 552 Z" fill="url(#body)"/>
+  <path d="M880 548 C878 530 895 518 912 516 C952 502 1002 482 1040 442 C1062 420 1092 406 1132 404 C1182 400 1222 395 1238 398 L1234 470 C1204 522 1152 578 1088 608 C1042 588 962 562 880 552 Z" fill="url(#bodyV)"/>
+  <!-- rim light along snout + brow -->
+  <path d="M880 548 C878 530 895 518 912 516 C952 502 1002 482 1040 442 C1062 420 1092 406 1132 404" fill="none" stroke="url(#rim)" stroke-width="4" opacity="0.9"/>
+  <!-- brow ridge -->
+  <path d="M1000 478 C1030 450 1070 440 1110 448 C1070 452 1040 468 1022 494 Z" fill="#14090a" stroke="#ff8a3a" stroke-width="1.4"/>
+  <!-- nostril -->
+  <ellipse cx="906" cy="530" rx="9" ry="6" fill="#ff6a1a" opacity="0.9" transform="rotate(-20 906 530)"/>
+  <!-- facial ridges / scars -->
+  <g fill="none" stroke="#ff8a3a" stroke-width="1.6" opacity="0.4">
+    <path d="M930 530 Q990 520 1040 480"/>
+    <path d="M960 560 Q1040 545 1110 500"/>
+    <path d="M1100 470 Q1150 470 1190 440"/>
+  </g>
+  <!-- upper teeth -->
+  <g fill="url(#tooth)">
+    <path d="M888 553 L898 598 L914 560 Z"/>
+    <path d="M924 560 L936 612 L952 568 Z"/>
+    <path d="M966 570 L980 622 L996 578 Z"/>
+    <path d="M1008 580 L1022 618 L1038 590 Z"/>
+    <path d="M1048 592 L1060 622 L1074 600 Z"/>
+  </g>
+
+  <!-- ========== EYE ========== -->
+  <circle cx="1062" cy="478" r="62" fill="url(#eyeGlow)"/>
+  <path d="M1028 484 Q1060 456 1100 470 Q1070 500 1028 484 Z" fill="#ffc83a" stroke="#4a0a04" stroke-width="2.5"/>
+  <ellipse cx="1066" cy="478" rx="4.5" ry="12" fill="#1a0400" transform="rotate(20 1066 478)"/>
+</svg>

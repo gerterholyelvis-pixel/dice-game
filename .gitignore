@@ -1,0 +1,7 @@
+.godot/
+*.translation
+export_presets.cfg
+*.aup3
+*_data/
+/android/
+.import/
